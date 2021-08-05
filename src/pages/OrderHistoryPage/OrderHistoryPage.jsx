@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect} from 'react';
 import './OrderHistoryPage.css';
-import * as usersService from '../../utilities/users-service';
 import Logo from '../../components/Logo/Logo';
 import UserLogOut from '../../components/UserLogOut/UserLogOut';
 import OrderList from '../../components/OrderList/OrderList';
@@ -13,9 +12,6 @@ export default function OrderHistoryPage({ user, setUser }) {
   const [orderHistory, setOrderHistory] = useState([]);
   // state for setting active order (show detail on right column)
   const [activeOrder, setActiveOrder] = useState('');
-  // 
-
-
 
   useEffect(function() {
     // Load cart (a cart is the unpaid order for the logged in user)

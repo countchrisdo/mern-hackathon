@@ -1,3 +1,4 @@
+
 const Order = require('../../models/order');
 // const Item = require('../../models/item');
 
@@ -6,25 +7,32 @@ module.exports = {
   addToCart,
   setItemQtyInCart,
   checkout,
+  getOrders,
 };
 
-// A cart is the unpaid order for a user
+async function getOrders(req, res) {
+  // A cart is the unpaid order for a user
+  const orders = await Order.getUserOrders(req.user._id);
+  res.json(orders);
+}
+
 async function cart(req, res) {
+  // A cart is the unpaid order for a user
   const cart = await Order.getCart(req.user._id);
   res.json(cart);
 }
 
-// Add an item to the cart
+// Add the item to the cart
 async function addToCart(req, res) {
   const cart = await Order.getCart(req.user._id);
-  await cart.addItemToCart(req.params.id);
+  await cart.addItemToCart(req.params.id); 
   res.json(cart);
 }
 
-// Updates an item's qty in the cart
+// Updates an item in the cart's qty
 async function setItemQtyInCart(req, res) {
-  const cart = await Order.getCart(req.user._id);
-  await cart.setItemQty(req.body.itemId, req.body.newQty);
+  let cart = await Order.getCart(req.user._id);
+  await cart.setItemQty(req.body.itemId, req.body.newQty); 
   res.json(cart);
 }
 
@@ -32,6 +40,6 @@ async function setItemQtyInCart(req, res) {
 async function checkout(req, res) {
   const cart = await Order.getCart(req.user._id);
   cart.isPaid = true;
-  await cart.save();
+  await cart.save(); 
   res.json(cart);
 }

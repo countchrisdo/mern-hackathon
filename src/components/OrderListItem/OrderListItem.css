@@ -1,0 +1,46 @@
+.OrderListItem {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3vmin;
+    padding: 2vmin;
+    color: var(--text-light);
+    background-color: var(--white);
+    border: .1vmin solid var(--tan-3);
+    border-radius: 1vmin;
+    font-size: 4vmin;
+  }
+  
+  .OrderListItem .emoji {
+    height: 8vw;
+    width: 8vw;
+    font-size: 4vw;
+    background-color: var(--tan-1);
+    border: .1vmin solid var(--tan-3);
+    border-radius: 1vmin;
+  }
+  
+  .OrderListItem .buy {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .OrderListItem .buy span {
+    font-size: 1.7vw;
+    text-align: center;
+    color: var(--text-light);
+  }
+  
+  .OrderListItem .name {
+    font-size: 2vw;
+    text-align: center;
+    color: var(--text-light);
+  }
+  
+  
+  
+  .OrderListItem.selected {
+      border-color: var(--orange);
+    border-width: .2vmin;
+  }

@@ -1,15 +1,18 @@
+
 import './OrderListItem.css';
 
-export default function OrderListItem({ order, isSelected, handleSelectOrder }) {
+export default function OrderListItem({ order, setActiveOrder, activeOrder }) {
   return (
-    <div className={`OrderListItem${isSelected ? ' selected' : ''}`} onClick={() => handleSelectOrder(order)}>
+    <div onClick={() => setActiveOrder(order)} className={order === activeOrder ? 'OrderListItem selected' : 'OrderListItem'} >
       <div>
-        <div>Order Id: <span className="smaller">{order.orderId}</span></div>
-        <div className="smaller">{new Date(order.updatedAt).toLocaleDateString()}</div>
+        <div>Order Id: 
+          <span class="smaller">{order.orderId}</span>
+        </div>
+        <div class="smaller">{order.orderDate}</div>
       </div>
-      <div className="align-rt">
+      <div class="align-rt">
         <div>${order.orderTotal.toFixed(2)}</div>
-        <div className="smaller">{order.totalQty} Item{order.totalQty > 1 ? 's' : ''}</div>
+        <div class="smaller">{order.totalQty} Items</div>
       </div>
     </div>
   );
