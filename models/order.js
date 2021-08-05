@@ -37,4 +37,15 @@ orderSchema.virtual('orderId').get(function() {
   return this.id.slice(-6).toUpperCase();
 });
 
+orderSchema.statics.getCart = function(userId) {
+  return this.findOneAndUpdate(
+    // query
+    { user: userId, isPaid: false },
+    // update - in the case the order doesn't exist - it's upserted
+    { user: userId },
+    // upsert option 
+    { upsert: true, new: true }
+  );
+}
+
 module.exports = mongoose.model('Order', orderSchema);
