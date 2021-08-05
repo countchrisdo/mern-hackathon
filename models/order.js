@@ -69,8 +69,8 @@ orderSchema.statics.getCart = async function (userId) {
 };
 
 // Instance method for adding an item to a cart (unpaid order)
-orderSchema.methods.addItemToCart = async function (itemId) {
-  // this keyword is bound to the cart (order doc)
+orderSchema.methods.addItemToCart = async function(itemId) {
+  // 'this' is the cart (unpaid order for the logged in user)
   const cart = this;
   // Check if the item already exists in the cart
   const lineItem = cart.lineItems.find(lineItem => lineItem.item._id.equals(itemId));
