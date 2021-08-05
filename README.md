@@ -1,3 +1,5 @@
+# Mern Hackathon
+
 To sync your code:
 
 git fetch --all
