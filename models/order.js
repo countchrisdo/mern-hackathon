@@ -48,4 +48,20 @@ orderSchema.statics.getCart = function(userId) {
   );
 }
 
+orderSchema.methods.addItemToCart = async function(itemId) {
+  // 'this' is the cart (unpaid order for the logged in user)
+  const cart = this;
+  // Check if the item already exists in the cart
+  const lineItem = cart.lineItems.find(lineItem => lineItem._id.equals(itemId));
+  if (lineItem) {
+    // It already exists, so increase the qty
+    lineItem.qty += 1;
+  } else {
+    const item = await mongoose.model('Item').findById(itemId);
+    cart.lineItems.push({ item });
+  }
+  // Return the promise returned by the save method
+  return cart.save();
+};
+
 module.exports = mongoose.model('Order', orderSchema);

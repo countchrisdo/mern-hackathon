@@ -38,7 +38,10 @@ export default function NewOrderPage({ user, setUser }) {
 
   /*--- Event Handlers ---*/
   async function handleAddToOrder(itemId) {
-    alert(`add item: ${itemId}`);
+    // Call the addItemToCart function in ordersAPI, passing to it the itemId, and assign the resolved promise to a variable named cart.
+    const updatedCart = await ordersAPI.addItemToCart(itemId);
+    // Update the cart state with the updated cart received from the server
+    setCart(updatedCart);
   }
 
 
