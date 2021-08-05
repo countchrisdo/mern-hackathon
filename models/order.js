@@ -64,4 +64,21 @@ orderSchema.methods.addItemToCart = async function(itemId) {
   return cart.save();
 };
 
+// Instance method to set an item's qty in the cart (will add item if does not exist)
+orderSchema.methods.setItemQty = function(itemId, newQty) {
+  // this keyword is bound to the cart (order doc)
+  const cart = this;
+  // Find the line item in the cart for the menu item
+  const lineItem = cart.lineItems.find(lineItem => lineItem.item._id.equals(itemId));
+  if (lineItem && newQty <= 0) {
+    // Calling remove, removes itself from the cart.lineItems array
+    lineItem.remove();
+  } else if (lineItem) {
+    // Set the new qty - positive value is assured thanks to prev if
+    lineItem.qty = newQty;
+  }
+  // return the save() method's promise
+  return cart.save();
+};
+
 module.exports = mongoose.model('Order', orderSchema);
